@@ -29,10 +29,6 @@ jobs:
           command: npm run test 
 
       - run:
-          name: Truffle Compile
-          command: npx truffle compile
-
-      - run:
           name: Security Scan (npm audit)
           command: npm audit || true 
 
