@@ -8,6 +8,15 @@ var indexRouter = require('./routes/index');
 
 var app = express();
 
+//Security headers
+app.disable('x-powered-by');
+app.use(function(req, res, next) {
+  res.set('X-Frame-Options', 'DENY');
+  res.set('Content-Security-Policy', "default-src 'self'; script-src 'self'; style-src 'self'; img-src 'self';");
+  res.set('X-Content-Type-Options', 'nosniff');
+  next();
+});
+
 // view engine setup
 app.set('views', path.join(__dirname, 'views'));
 app.set('view engine', 'ejs');
