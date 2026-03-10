@@ -35,3 +35,22 @@ jobs:
       - run:
           name: Security Scan (npm audit)
           command: npm audit || true 
+
+  deploy:
+    working_directory: ~/project
+    docker:
+      - image: cimg/node:18.16.0
+    steps:
+      - checkout
+      - add_ssh_keys:
+          fingerprints:
+            - "SHA256:6TB/PiDNp/WtG622I7YWDXg7GmVLDsK2vn7kD4Gf2IQ"
+      - run:
+          name: Deploy to AWS via SSH
+          command: |
+            ssh -o StrictHostKeyChecking=no ubuntu@$SERVER_IP "
+              cd ~/app && 
+              git pull origin main || git clone https://github.com/MaxP0/SimpleApplication.git . && 
+              npm install && 
+              sudo pm2 restart all || sudo pm2 start app.js --name web-app
+              "
