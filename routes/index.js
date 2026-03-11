@@ -12,5 +12,11 @@ router.get('/about', function(req, res, next) {
   res.render('about', { title: "About Simple Application" });
 });
 
+/* GET Contact page. */
+router.get('/contact', function(req, res, next) {
+  res.render('contact', { title: "Contact Simple Application" });
+});
+
+
 
 module.exports = router;
