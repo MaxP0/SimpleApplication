@@ -62,8 +62,10 @@ jobs:
               fi &&
               cd ~/app &&
               npm install --omit=dev &&
-              sudo pm2 describe SimpleApplication > /dev/null 2>&1 \
-                && sudo pm2 restart SimpleApplication \
-                || sudo pm2 start bin/www --name SimpleApplication &&
+              if sudo pm2 describe SimpleApplication > /dev/null 2>&1; then
+                sudo pm2 restart SimpleApplication
+              else
+                sudo pm2 start bin/www --name SimpleApplication
+              fi &&
               sudo pm2 save
             "
