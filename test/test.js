@@ -8,6 +8,6 @@ describe('Basic Array Test', function () {
 
 describe('Math Test for CA', function () {
   it('should return 2 when 1 and 1 are added', function () {
-    assert.equal(1 + 5, 2);
+    assert.equal(1 + 1, 2);
   });
 });
